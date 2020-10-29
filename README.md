@@ -19,7 +19,7 @@ adduser --disabled-password --group sudo deepin
 ```
 
 # Booting
-1) place efi and grub directory in ESP partition
+1) install GRUB2 bootloader in ESP partition
 2) edit grub/grub.cfg
 ```
 insmod loopback
