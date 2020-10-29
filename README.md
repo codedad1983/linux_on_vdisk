@@ -2,8 +2,8 @@
 1) boot from a linux livecd which you want to install
 2) open a console and run
 ```
-sudo mount -o loop </path/to/image/file/name.img> /mnt
-sudo unsquashfs -f -d /mnt </path/to/livecd/filesystem.squashfs>
+sudo mount -o loop /path/to/image/file/name.img /mnt
+sudo unsquashfs -f -d /mnt /path/to/livecd/filesystem.squashfs
 sudo cp loop /mnt/usr/share/initramfs-tools/scripts/loop
 sudo chroot /mnt
 ln -sf boot/initrd.img-$(uname -r) initrd.img
@@ -16,8 +16,14 @@ adduser --disabled-password --group sudo deepin
 1) place efi and grub directory in ESP partition
 2) edit grub/grub.cfg
 ```
-menuentry 'Deepin' {
-        set img_file=/deepin.img
+menuentry 'Windows' {
+	set img_file=/efi/Microsoft/Boot/bootmgfw.efi
+	search --file --set=img_dev --no-floppy $img_file
+	set root=($img_dev)
+	chainloader $img_file
+}
+menuentry 'Linux' {
+        set img_file=/path/to/image/file/name.img
         search --file --set=img_dev --no-floppy $img_file
         probe --set part_uuid --fs-uuid ($img_dev)
         loopback loop ($img_dev)$img_file
