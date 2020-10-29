@@ -15,4 +15,14 @@ adduser --disabled-password --group sudo deepin
 # Booting above system
 1) place efi and grub directory in ESP partition
 2) edit grub/grub.cfg
+```
+menuentry 'Deepin' {
+        set img_file=/deepin.img
+        search --file --set=img_dev --no-floppy $img_file
+        probe --set part_uuid --fs-uuid ($img_dev)
+        loopback loop ($img_dev)$img_file
+        linux (loop)/vmlinuz boot=loop root=UUID=$part_uuid loop=$img_file rw intel_iommu=on pcie_acs_override=downstream,multifunction i915.enable_gvt=1 kvm.ignore_msrs=1 nouveau.modeset=0 vfio_iommu_type1.allow_unsafe_interrupts=1 vfio-pci.ids=10de:1d10,10de:1ba1,10de:10f0,10de:1f11,10de:10f9,10de:1ada,10de:1adb video=vesafb:off,efifb:off
+        initrd (loop)/initrd.img
+}
+```
 3) ...
