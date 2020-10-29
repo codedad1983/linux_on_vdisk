@@ -12,7 +12,7 @@ update-initramfs -u -k all
 adduser --disabled-password --group sudo deepin
 ```
 
-# Booting above system
+# Booting system
 1) place efi and grub directory in ESP partition
 2) edit grub/grub.cfg
 ```
