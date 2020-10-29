@@ -1,6 +1,6 @@
 # Installing
 1) boot from a linux livecd which you want to install
-2) mount your ntfs partition
+2) mount your real physical partition
 3) create a loopback image file on above ntfs partition
 ```
 dd if=/dev/zero of=/path/to/image/file/name.img bs=1M count=100000
