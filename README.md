@@ -1,4 +1,4 @@
-# Installing linux on a NTFS partition
+# Installing
 1) boot from a linux livecd which you want to install
 2) mount your ntfs partition
 3) create a loopback image file on above ntfs partition
@@ -18,7 +18,7 @@ update-initramfs -u -k all
 adduser --disabled-password --group sudo deepin
 ```
 
-# Booting system
+# Booting
 1) place efi and grub directory in ESP partition
 2) edit grub/grub.cfg
 ```
