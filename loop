@@ -184,7 +184,7 @@ local_mount_root()
 	modprobe loop
 	mkdir -p /host
 	if ! mount -n -w ${FSTYPE:+-t "${FSTYPE}"} -o nodiratime,noatime "${ROOT}" "/host"; then
-		panic "Failed to mount ${ROOT} as target file system."
+		panic "Failed to mount ${ROOT} as host file system."
 	fi
 	if ! mount -n ${roflag} -o loop "/host${loop}" "${rootmnt}"; then
 		panic "Failed to mount ${loop} as root file system."
