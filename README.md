@@ -1,6 +1,12 @@
 # Installing linux on a NTFS partition
 1) boot from a linux livecd which you want to install
-2) open a console and run
+2) mount your ntfs partition
+3) create a loopback image file on above ntfs partition
+```
+dd if=/dev/zero of=/path/to/image/file/name.img bs=1M count=100000
+mkfs.ext4 /path/to/image/file/name.img
+```
+4) open a console and run
 ```
 sudo mount -o loop /path/to/image/file/name.img /mnt
 sudo unsquashfs -f -d /mnt /path/to/livecd/filesystem.squashfs
@@ -16,6 +22,11 @@ adduser --disabled-password --group sudo deepin
 1) place efi and grub directory in ESP partition
 2) edit grub/grub.cfg
 ```
+insmod loopback
+insmod ntfs
+insmod ext
+insmod part_gpt
+insmod search
 menuentry 'Windows' {
 	set img_file=/efi/Microsoft/Boot/bootmgfw.efi
 	search --file --set=img_dev --no-floppy $img_file
